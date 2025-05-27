@@ -19,7 +19,7 @@
         }
     });
 
-    // Guardar perfil
+    // Guarda
     $('#btnGuardarPerfil').click(function (e) {
         e.preventDefault();
         const doc = $('#txtDocumento').val().trim();
