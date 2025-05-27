@@ -1,0 +1,104 @@
+﻿/* Estilo general del body para páginas normales */
+body {
+    background-color: #f8f9fa;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header fijo en la parte superior */
+header.navbar {
+    background-color: #343a40 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Contenido principal que crece para empujar el footer */
+main.container {
+    flex: 1;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Footer */
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+}
+
+/* Mantenemos los estilos existentes para login */
+body.login-page {
+    background: url('../Imagenes/fondo-login.jpg') center center no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+#formcontent {
+    background: #fff;
+    border-radius: 10px;
+    padding: 0;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.login-card {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.5s ease-in-out;
+}
+
+    .login-card.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+/* Mantenemos estilos de la caja de bienvenida */
+.welcome-box {
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+    .welcome-box h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .welcome-box p {
+        color: #555;
+    }
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1 0 auto; /* permite que main crezca y ocupe el espacio disponible */
+}
+
+footer {
+    flex-shrink: 0; /* evita que el footer se reduzca */
+}
