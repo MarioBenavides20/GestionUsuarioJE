@@ -43,7 +43,6 @@
         });
     });
 
-    // Cambiar contraseña
     $('#btnGuardarPwd').click(function (e) {
         e.preventDefault();
 
