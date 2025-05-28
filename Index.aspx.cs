@@ -62,27 +62,44 @@ namespace Proyecto3
         [WebMethod]
         public static object ObtenerUsuarios()
         {
-            List<object> usuarios = new List<object>();
+            var usuarios = new List<object>();
+            string cs = ConfigurationManager.ConnectionStrings["conexion"].ConnectionString;
 
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["conexion"].ConnectionString))
+            using (var conn = new SqlConnection(cs))
+            using (var cmd = new SqlCommand(@"
+        SELECT 
+            id, 
+            Usuario, 
+            CONVERT(varchar, DECRYPTBYPASSPHRASE(@patron, Contrasenia)) AS Contrasenia,
+            Documento, 
+            Sexo, 
+            Email, 
+            FechaNacimiento 
+        FROM Usuarios", conn))
             {
-                string query = "SELECT id, Usuario FROM Usuarios";
-                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@patron", patron);
                 conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = cmd.ExecuteReader())
                 {
-                    usuarios.Add(new
+                    while (reader.Read())
                     {
-                        Id = reader["id"],
-                        Usuario = reader["Usuario"],
-                        Contrasenia = "********" // oculta en frontend
-                    });
+                        usuarios.Add(new
+                        {
+                            Id = reader["id"],
+                            Usuario = reader["Usuario"].ToString(),
+                            Contrasenia = "********",
+                            Documento = reader["Documento"]?.ToString() ?? "",
+                            Sexo = reader["Sexo"]?.ToString() ?? "",
+                            Email = reader["Email"]?.ToString() ?? "",
+                            FechaNacimiento = reader["FechaNacimiento"] == DBNull.Value
+                                              ? ""
+                                              : ((DateTime)reader["FechaNacimiento"]).ToString("yyyy-MM-dd")
+                        });
+                    }
                 }
             }
 
-            return new { success = true, usuarios = usuarios };
+            return new { success = true, usuarios };
         }
 
         [WebMethod]

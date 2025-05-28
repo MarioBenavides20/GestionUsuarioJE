@@ -102,3 +102,30 @@ main {
 footer {
     flex-shrink: 0; /* evita que el footer se reduzca */
 }
+
+/* Contenedor del formulario, centrado y con transición */
+#contenedorFormPequeno {
+    max-width: 600px;
+    transition: all 0.3s ease;
+    margin-bottom: 2rem;
+}
+
+    /* Modo “expandido”: ocupar más ancho y destacarse */
+    #contenedorFormPequeno.expandido {
+        max-width: 100%;
+        padding: 2rem;
+        background-color: #f8f9fa;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+/* Transición suave para ocultar/mostrar la tabla */
+#contenedorTabla {
+    transition: opacity 0.3s ease;
+}
+
+    #contenedorTabla.oculto {
+        opacity: 0;
+        pointer-events: none;
+        height: 0;
+        overflow: hidden;
+    }
